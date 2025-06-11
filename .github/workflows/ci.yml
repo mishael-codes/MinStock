@@ -1,0 +1,57 @@
+# .github/workflows/ci.yml
+
+name: MinStock CI/CD
+
+on:
+  # Trigger the workflow on pushes to the 'main' branch
+  push:
+    branches:
+      - main
+  # Trigger the workflow on pull requests targeting the 'main' branch
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Use a standard Ubuntu runner
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4 # Action to check out your repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use Node.js 20 (or 'lts/*' for the latest LTS version)
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v3 # Action to install pnpm
+        with:
+          version: 8 # Specify pnpm version 8
+          run_install: false # We'll run pnpm install explicitly later
+
+      - name: Get pnpm store directory for caching
+        id: pnpm-cache # Give this step an ID to reference its outputs
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT # Get pnpm's global store path
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v4 # Action for caching
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }} # Path to cache
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }} # Cache key based on OS and pnpm-lock.yaml
+          restore-keys: |
+            ${{ runner.os }}-pnpm- # Fallback key if exact match isn't found
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile # Install dependencies using pnpm
+
+      - name: Build project
+        run: pnpm run build # Run the build script defined in package.json
+
+      - name: Run tests
+        # This step will only run if tests are added.
+        run: echo "No 'test' script found in package.json. If you want to run tests, please add a 'test' script (e.g., 'vitest', 'jest') to your package.json."
+        # run: pnpm run test # Uncomment this line if you add a 'test' script
+        # continue-on-error: true # Optional: Set to 'true' if you want the build to continue even if tests fail
