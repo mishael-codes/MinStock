@@ -4,12 +4,12 @@ import HeroImage from "../assets/images/hero-img.webp";
 
 const Stocks = () => {
   return (
-    <>
-      <section className="h-screen">
+    <div className="overflow-x-hidden">
+      <section className="relative h-screen">
         <img
           src={HeroImage}
           alt="A trading chart"
-          className="bg-cover min-h-screen min-w-screen absolute -z-1"
+          className="object-cover w-full h-full absolute top-0 left-0 -z-10"
         />
         <Logo />
         <div className="h-[80vh] flex flex-col items-center justify-center text-center p-8">
@@ -24,10 +24,10 @@ const Stocks = () => {
           </a>
         </div>
       </section>
-      <section id="stocks-list" className="p-8">
+      <section id="stocks-list" className="p-5">
         <StockData />
       </section>
-    </>
+    </div>
   );
 };
 export default Stocks;

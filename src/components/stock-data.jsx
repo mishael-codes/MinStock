@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import { ChevronDown, ChevronUp } from "react-feather";
 const symbols = [
   "AAPL",
   "GOOGL",
@@ -138,15 +138,15 @@ const StockData = () => {
         );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-screen">
       <div className="gap-4 items-center">
-        <p className="font-medium" onClick={() => setShowSectors(!showSectors)}>
-          Filter by sector:
+        <p className="flex items-center justify-center mb-4 font-medium cursor-pointer" onClick={() => setShowSectors(!showSectors)}>
+          Filter by sector {showSectors ? <ChevronUp /> : <ChevronDown />}
         </p>
         <div
           className={`transition-all duration-500 ease-in-out ${
             showSectors ? "opacity-100 max-h-screen grid" : "opacity-0 max-h-0 grid"
-          } grid-cols-2 gap-2`}
+          } grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2`}
         >
           {sectors.map((sector) => (
             <div
@@ -163,7 +163,7 @@ const StockData = () => {
       {filteredStocks.length === 0 ? (
         <p>Loading stock data...</p>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {filteredStocks.map(({ symbol, c, pc, name, finnhubIndustry }) => (
             <div key={symbol} className="p-4 border rounded shadow">
               <h2 className="text-xl font-bold">{symbol}</h2>
