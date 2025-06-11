@@ -14,21 +14,21 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # Use a standard Ubuntu runner
+    runs-on: ubuntu-latest 
 
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v4 # Action to check out your repository
+        uses: actions/checkout@v4 # Action to check  repository
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Use Node.js 20 (or 'lts/*' for the latest LTS version)
+          node-version: '20' 
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v3 # Action to install pnpm
+        uses: pnpm/action-setup@v3 # install pnpm
         with:
-          version: 8 # Specify pnpm version 8
+          version: 10 # Specify pnpm version 10
           run_install: false # We'll run pnpm install explicitly later
 
       - name: Get pnpm store directory for caching
@@ -37,7 +37,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT # Get pnpm's global store path
 
       - name: Cache pnpm modules
-        uses: actions/cache@v4 # Action for caching
+        uses: actions/cache@v4 # caching
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }} # Path to cache
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }} # Cache key based on OS and pnpm-lock.yaml
