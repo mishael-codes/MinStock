@@ -192,8 +192,10 @@ const StockData = () => {
       </div>
 
       {/* Stock Cards */}
-      {filteredStocks.length === 0 ? (
+      {Object.keys(stocks).length === 0 && filteredStocks.length === 0 ? (
         <p className="text-center">Loading stock data...</p>
+      ) : filteredStocks.length === 0 ? (
+        <p className="text-center">No stocks found.</p>
       ) : (
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {filteredStocks.map(({ symbol, c, pc, name, finnhubIndustry }) => {
