@@ -153,7 +153,7 @@ const StockData = () => {
           Filter by sector {showSectors ? <ChevronUp /> : <ChevronDown />}
         </p>
         <div
-          className={`transition-all duration-500 ease-in-out ${
+          className={`transition-all duration-500 ease-in-out rounded ${
             showSectors
               ? "opacity-100 max-h-screen grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 pointer-events-auto"
               : "opacity-0 max-h-0 pointer-events-none"
@@ -181,7 +181,7 @@ const StockData = () => {
         {["All", "Gainers", "Losers"].map((type) => (
           <button
             key={type}
-            className={`px-4 py-2 border rounded ${
+            className={`px-4 py-2 border rounded cursor-pointer ${
               filterType === type ? "bg-green-200" : "bg-white"
             }`}
             onClick={() => setFilterType(type)}
