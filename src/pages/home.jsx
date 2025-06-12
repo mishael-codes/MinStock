@@ -1,16 +1,12 @@
 import { Link } from "react-router";
 import Logo from "../components/logo";
-import HeroImage from "../assets/images/hero-img.webp";
+import HeroImageComp from "../components/HeroImage";
 
 const Home = () => {
   return (
     <>
       <div className="h-screen relative">
-        <img
-          src={HeroImage}
-          alt="A trading chart"
-          className="bg-cover min-h-screen min-w-screen absolute -z-1"
-        />
+        <HeroImageComp />
         <Logo />
         <div className="h-[80vh] flex flex-col items-center justify-center text-center p-8">
           <h2 className="mt-4 text-3xl md:text-5xl text-gray-100 font-bold">
