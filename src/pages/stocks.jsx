@@ -1,6 +1,7 @@
 import Logo from "../components/logo";
 import StockData from "../components/stock-data";
 import HeroImageComp from "../components/HeroImage.jsx";
+import { ChevronDown } from "react-feather";
 
 const Stocks = () => {
   return (
@@ -14,9 +15,9 @@ const Stocks = () => {
           </h2>
           <a
             href="#stocks-list"
-            className="mt-6 bg-lime-600 text-white px-4 py-2 rounded"
+            className="absolute mt-6 bg-lime-600 text-white px-4 py-2 rounded bottom-20 animate-bounce hover:animate-none"
           >
-            Get Started
+           <ChevronDown />
           </a>
         </div>
       </section>
