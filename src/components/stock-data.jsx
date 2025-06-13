@@ -205,8 +205,7 @@ const StockData = () => {
                 : null;
 
             return (
-              <Link
-                to={`/stocks/${symbol}`}
+              <div
                 key={symbol}
                 className="p-4 border rounded shadow"
               >
@@ -226,7 +225,7 @@ const StockData = () => {
                     "N/A"
                   )}
                 </p>
-              </Link>
+              </div>
             );
           })}
         </div>
